@@ -1,0 +1,37 @@
+@theme {
+  /* font family */
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Poppins", sans-serif;
+
+  /* Brand Colors */
+  --color-primary: #6abf2c;
+  --color-primary-dark: #4f9a1d;
+  --color-accent: #ff8a00;
+  --color-accent-dark: #e56d00;
+
+  /* Backgrounds */
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+
+  /* Text */
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+
+  /* Borders */
+  --color-border: #e5e7eb;
+
+  /* Status */
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  /* Shadows */
+  --shadow-card: 0 8px 30px rgba(0,0,0,.08);
+  --shadow-input: 0 2px 8px rgba(0,0,0,.05);
+}

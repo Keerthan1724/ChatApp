@@ -1,0 +1,35 @@
+@utility btn-gradient {
+  @apply bg-linear-to-r from-accent to-primary text-white;
+}
+
+@utility page-background {
+  @apply bg-background min-h-screen;
+}
+
+@utility card {
+  @apply bg-surface rounded-xl shadow-(--shadow-card) border border-border;
+}
+
+@utility input-field {
+  @apply w-full rounded-lg border border-border px-4 py-3 outline-none;
+}
+
+@utility heading-1 {
+  @apply text-4xl font-bold text-text;
+}
+
+@utility heading-2 {
+  @apply text-3xl font-semibold text-text;
+}
+
+@utility heading-3 {
+  @apply text-2xl font-semibold text-text;
+}
+
+@utility body {
+  @apply text-base text-text-muted;
+}
+
+@utility caption {
+  @apply text-sm text-text-muted;
+}

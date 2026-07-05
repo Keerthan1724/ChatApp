@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@import "./theme.css";
+@import "./utilities.css";
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
