@@ -45,6 +45,7 @@ class AuthService:
             httponly=True,
             secure=not settings.DEBUG,
             samesite=settings.SESSION_COOKIE_SAMESITE,
+            path="/",
             max_age=int(
                 settings.SIMPLE_JWT["REFRESH_TOKEN_LIFETIME"].total_seconds()
             ),
@@ -99,6 +100,7 @@ class AuthService:
     @staticmethod
     def refresh(request):
         refresh_token = request.COOKIES.get("refresh_token")
+        print(request.COOKIES)
 
         if not refresh_token:
             raise ValidationError({ "detail": "Refresh token not found." })
@@ -111,10 +113,10 @@ class AuthService:
             response = Response({ "access": str(refresh.access_token) })
 
             if settings.SIMPLE_JWT["ROTATE_REFRESH_TOKENS"]:
-                refresh.blacklist()
+                if settings.SIMPLE_JWT["BLACKLIST_AFTER_ROTATION"]:
+                    refresh.blacklist()
 
                 new_refresh = RefreshToken.for_user(user)
-
                 AuthService._set_refresh_cookie(response, str(new_refresh))
 
             return response

@@ -89,6 +89,8 @@ api.interceptors.response.use(
         isRefreshing = false;
       }
     }
+  console.log(error.response.status);
+
     return Promise.reject(error);
   }
 );
