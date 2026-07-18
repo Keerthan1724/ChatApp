@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import emailVerifiedImage from "@/assets/email_verification_success.png";
-import SuccessPage from "@/components/ui/SuccessPage";
+import SuccessPage from "@/components/common/SuccessPage";
 import { setFlowState } from "@/utils/flowGuard";
 
 const EmailVerificationSuccess = ({ mode = "register" }) => {

@@ -5,7 +5,7 @@ import resetPasswordImage from "@/assets/reset_password.png";
 
 import AuthLayout from "@/layouts/AuthLayout";
 import Button from "@/components/ui/Button";
-import PasswordInput from "@/components/ui/PasswordInput";
+import PasswordInput from "@/components/auth/PasswordInput";
 
 import { validateResetPassword } from "@/utils/validators";
 import { getBackendErrorMessage } from "@/utils/errorHelpers";

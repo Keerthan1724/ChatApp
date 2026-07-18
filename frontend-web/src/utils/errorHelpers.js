@@ -3,6 +3,7 @@ export const getBackendErrorMessage = (
   fallback = "Something went wrong. Please try again.",
 ) => {
   const responseData = error?.response?.data;
+  
   if (!responseData) {
     return fallback;
   }

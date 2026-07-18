@@ -6,7 +6,7 @@ import createAccountImage from "@/assets/create_account.png";
 import AuthLayout from "@/layouts/AuthLayout";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import PasswordInput from "@/components/ui/PasswordInput";
+import PasswordInput from "@/components/auth/PasswordInput";
 
 import { useRegister } from "@/context/RegisterContext";
 import { validateCreateAccount } from "@/utils/validators";

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiUser } from "react-icons/fi";
 
@@ -7,14 +7,16 @@ import loginImage from "@/assets/login_icon.png";
 import AuthLayout from "@/layouts/AuthLayout";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import PasswordInput from "@/components/ui/PasswordInput";
+import PasswordInput from "@/components/auth/PasswordInput";
 
 import { validateLogin } from "@/utils/validators";
 import { getBackendErrorMessage } from "@/utils/errorHelpers";
 import authService from "@/services/authServices";
+import useChat from "@/hooks/useChat";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setCurrentUser } = useChat();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -23,7 +25,34 @@ const Login = () => {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  
+  // 1. Default rememberMe to true if credentials exist in localStorage
+  const [rememberMe, setRememberMe] = useState(() => {
+    return !!localStorage.getItem("access");
+  });
+
+  // 2. Safely resolve auto-login without mixing sessionStorage and localStorage
+  useEffect(() => {
+    let token = null;
+    let storedUser = null;
+
+    if (sessionStorage.getItem("access") && sessionStorage.getItem("user")) {
+      token = sessionStorage.getItem("access");
+      storedUser = sessionStorage.getItem("user");
+    } else if (localStorage.getItem("access") && localStorage.getItem("user")) {
+      token = localStorage.getItem("access");
+      storedUser = localStorage.getItem("user");
+    }
+
+    if (token && storedUser) {
+      try {
+        setCurrentUser(JSON.parse(storedUser));
+        navigate("/chat", { replace: true });
+      } catch {
+        setCurrentUser(null);
+      }
+    }
+  }, [navigate, setCurrentUser]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,9 +85,21 @@ const Login = () => {
       setLoading(true);
       setErrors({});
 
-      await authService.login(formData);
+      // This correctly passes { email, password, remember } to your service!
+      await authService.login({
+        ...formData,
+        remember: rememberMe,
+      });
 
-      navigate("/dashboard");
+      // 3. Retrieve user profile cleanly from whichever storage was used
+      const activeStorage = rememberMe ? localStorage : sessionStorage;
+      const storedUser = JSON.parse(activeStorage.getItem("user") || "null");
+
+      if (storedUser) {
+        setCurrentUser(storedUser);
+      }
+
+      navigate("/chat");
     } catch (err) {
       setErrors({
         auth: getBackendErrorMessage(err, "Invalid login credentials."),

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import verifyEmailImage from "@/assets/verify_email_otp.png";
 import AuthLayout from "@/layouts/AuthLayout";
 import Button from "@/components/ui/Button";
-import OTPInput from "@/components/ui/OTPInput";
+import OTPInput from "@/components/auth/OTPInput";
 
 import { useRegister } from "@/context/RegisterContext";
 import authService from "@/services/authServices";

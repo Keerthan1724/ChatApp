@@ -32,7 +32,7 @@ const BackButton = ({ className = "" }) => {
       className={clsx(
         "absolute flex items-center justify-center rounded-full border border-border bg-white shadow-sm transition",
         "left-4 top-4 h-8 w-8 sm:left-6 sm:top-6 sm:h-10 sm:w-10",
-        "hover:bg-gray-50 active:scale-95",
+        "hover:bg-gray-50 active:scale-95 cursor-pointer",
         className,
       )}
     >

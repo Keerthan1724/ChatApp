@@ -27,7 +27,8 @@ const Input = ({
         )}
       >
         {Icon && (
-          <Icon className="text-text-muted h-4 w-4 sm:h-5 sm:w-5 shrink-0" />
+          <Icon className="text-text-muted h-4 w-4 sm:h-5 sm:w-5 shrink-0" 
+ />
         )}
 
         <input

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FiEye, FiEyeOff, FiLock } from "react-icons/fi";
 import clsx from "clsx"; 
 
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../ui/ErrorMessage";
 import PasswordStrength from "./PasswordStrength";
 
 const PasswordInput = ({

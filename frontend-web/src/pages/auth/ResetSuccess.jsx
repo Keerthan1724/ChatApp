@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import resetSuccessImage from "@/assets/reset_success.png"; 
-import SuccessPage from "@/components/ui/SuccessPage";
+import SuccessPage from "@/components/common/SuccessPage";
 
 const ResetSuccess = () => {
   const navigate = useNavigate();

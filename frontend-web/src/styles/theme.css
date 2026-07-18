@@ -1,7 +1,7 @@
 @theme {
-  /* font family */
+  /* Font Family */
   --font-sans: "Inter", sans-serif;
-  --font-display: "Poppins", sans-serif;
+  --font-display: Poppins, sans-serif;
 
   /* Brand Colors */
   --color-primary: #6abf2c;
@@ -9,29 +9,36 @@
   --color-accent: #ff8a00;
   --color-accent-dark: #e56d00;
 
-  /* Backgrounds */
+  /* Chat Specific Panels & Semantic Backgrounds */
   --color-background: #f8fafc;
   --color-surface: #ffffff;
+  --color-chat-bg: #efeae2;
+  --color-sidebar-bg: #f0f2f5;
+  --color-active-item: #f0f2f5;
+  --color-hover-item: #f5f6f6;
 
-  /* Text */
+  /* Text Colors */
   --color-text: #1f2937;
   --color-text-muted: #6b7280;
+  --color-text-chat-time: #667781;
 
   /* Borders */
   --color-border: #e5e7eb;
+  --color-border-chat: #e9edef;
 
-  /* Status */
+  /* Status Identifiers */
   --color-success: #22c55e;
   --color-error: #ef4444;
   --color-warning: #f59e0b;
+  --color-seen-blue: #53bdeb;
 
-  /* Radius */
+  /* Radius Defaults */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-xl: 24px;
 
-  /* Shadows */
-  --shadow-card: 0 8px 30px rgba(0,0,0,.08);
-  --shadow-input: 0 2px 8px rgba(0,0,0,.05);
+  /* System Shadows */
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, .08);
+  --shadow-input: 0 2px 8px rgba(0, 0, 0, .05);
 }

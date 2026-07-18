@@ -33,3 +33,42 @@
 @utility caption {
   @apply text-sm text-text-muted;
 }
+
+/* Chat Layout Structural Rules (Enforcing Your Minimum Compression Thresholds) */
+@utility main-layout-grid {
+  @apply w-full h-screen overflow-hidden flex flex-col bg-surface select-none relative;
+}
+
+@utility layout-sidebar-rail {
+  @apply w-[64px] h-full flex flex-col justify-between items-center bg-sidebar-bg border-r border-border-chat py-4 flex-shrink-0 z-20;
+}
+
+@utility layout-chat-list {
+  @apply min-w-[340px] max-w-[450px] w-[30vw] h-full bg-surface flex flex-col border-r border-border-chat flex-shrink-0 z-10;
+}
+
+@utility layout-chat-window {
+  @apply flex-1 min-w-[400px] h-full bg-chat-bg flex flex-col relative;
+}
+
+@utility layout-receiver-info {
+  @apply w-[30vw] min-w-[300px] max-w-[400px] h-full bg-surface border-l border-border-chat flex flex-col flex-shrink-0;
+}
+
+/* Custom Chat Scrollbar Styling */
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(11, 20, 26, 0.2);
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(11, 20, 26, 0.3);
+  }
+}

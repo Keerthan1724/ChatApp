@@ -16,7 +16,6 @@ import authService from "@/services/authServices";
 import { setFlowState } from "@/utils/flowGuard";
 import { getBackendErrorMessage } from "@/utils/errorHelpers";
 
-
 const ReviewInfo = () => {
   const navigate = useNavigate();
   const { registerData } = useRegister();

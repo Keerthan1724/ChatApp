@@ -10,7 +10,9 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem("access");
+  const token =
+    localStorage.getItem("access") ||
+    sessionStorage.getItem("access");
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -19,6 +21,20 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+let isRefreshing = false;
+let failedQueue = []; 
+
+const processQueue = (error, token = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+};
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -26,32 +42,53 @@ api.interceptors.response.use(
 
     if (
       error.response?.status === 401 &&
-      !originalRequest._retry
+      !originalRequest._retry &&
+      !originalRequest.url.includes("/auth/login/")
     ) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            return api(originalRequest);
+          })
+          .catch((err) => Promise.reject(err));
+      }
+
       originalRequest._retry = true;
+      isRefreshing = true;
 
       try {
         const response = await axios.post(
           `${API_BASE_URL}/auth/token/refresh/`,
           {},
-          {
-            withCredentials: true,
-          }
+          { withCredentials: true }
         );
 
-        sessionStorage.setItem("access", response.data.access);
+        const newAccessToken = response.data.access;
 
-        originalRequest.headers.Authorization =
-          `Bearer ${response.data.access}`;
+        if (localStorage.getItem("user")) {
+          localStorage.setItem("access", newAccessToken);
+        } else {
+          sessionStorage.setItem("access", newAccessToken);
+        }
 
+        api.defaults.headers.common["Authorization"] = `Bearer ${newAccessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        
+        processQueue(null, newAccessToken);
         return api(originalRequest);
       } catch (err) {
-        sessionStorage.removeItem("access");
-        sessionStorage.removeItem("user");
+        processQueue(err, null);
+        sessionStorage.clear();
+        localStorage.clear();
         window.location.href = "/login";
+        return Promise.reject(err);
+      } finally {
+        isRefreshing = false;
       }
     }
-
     return Promise.reject(error);
   }
 );

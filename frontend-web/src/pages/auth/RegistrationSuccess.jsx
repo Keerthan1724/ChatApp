@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import registrationSuccessImage from "@/assets/registration_success.png";
-import SuccessPage from "@/components/ui/SuccessPage";
+import SuccessPage from "@/components/common/SuccessPage";
 
 const RegistrationSuccess = () => {
   const navigate = useNavigate();

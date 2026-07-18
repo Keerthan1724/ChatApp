@@ -5,7 +5,7 @@ import verifyOtpImage from "@/assets/verify_otp.png";
 
 import AuthLayout from "@/layouts/AuthLayout";
 import Button from "@/components/ui/Button";
-import OTPInput from "@/components/ui/OTPInput";
+import OTPInput from "@/components/auth/OTPInput";
 
 import maskEmail from "@/utils/maskEmail";
 import { validateEmailOTP } from "@/utils/validators";

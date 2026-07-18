@@ -18,6 +18,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     bio = models.TextField(default="💬 QuickChat User")
     is_email_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    last_seen = models.DateTimeField(null=True, blank=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
